@@ -7,8 +7,10 @@ module.exports={
     showLogin(req,res){
         res.render("./user/login.ejs",{})
     },
-    showLogout(req,res){
-                 
+    Logout(req,res){
+      req.session.destroy(function(){
+          res.redirect("/")
+      })    
     },
     reg(req,res){
         let userInfo=req.body

@@ -4,5 +4,6 @@ const conn=mysql.createConnection({
     user:"root",
     password:"root",
     database:"blog"
+    // multipleStatement:true,
 })
 module.exports=conn

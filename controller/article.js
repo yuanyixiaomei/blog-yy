@@ -1,7 +1,11 @@
 
 module.exports={
     showAdd(req,res){
-        res.render("article/add.ejs",{})
+        // if(!req.session.islogin) return res.redirect("/")
+        res.render("article/add.ejs",{
+            user:req.session.user,
+            islogin: req.session.islogion
+        })
     },
  
 }

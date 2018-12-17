@@ -19,7 +19,7 @@ router.post("/login",ctrl.login)
 
 
 //监控退出
-router.get("/logout",ctrl.showLogout)
+router.get("/logout",ctrl.Logout)
 
 
 module.exports=router
