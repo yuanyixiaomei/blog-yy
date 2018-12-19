@@ -1,3 +1,51 @@
 <%-  include("../commo/header.ejs")%>
-<h1>这是文章添加页</h1>
+
+<link rel="stylesheet" href="../../node_modules/mditor/dist/css/mditor.min.css" />
+
+<script src="../../node_modules/mditor/dist/js/mditor.min.js"></script>
+
+<div class="container">
+    
+    <form id="form">
+        <div class="form-group">
+            <label for="">文章标题</label>
+            <textarea type="text" name="title" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="">文章内容</label>
+            <textarea class="form-control" name="content" id="editor"></textarea>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="发表文章" class="btn btn-primary" id="btn">
+        </div>
+
+
+
+    </form>
+    <script>
+        var mditor = Mditor.fromTextarea(document.getElementById('editor'));
+
+     
+        mditor.on('ready', function () {
+          
+            mditor.value = '** hello **';
+        });
+        $("#form").on("submit", function (e) {
+            e.preventDefault()
+            $.ajax({
+                type: "post",
+                url: "/article/add",
+                data: $("#form").serialize(),
+                dataType: "json",
+                success: function (result) {
+                 if(result.status !==200) return alert("发表文章失败")
+                 location.href="./article/info"+result.insertId
+                }
+            });
+        })
+    </script>
+</div>
+
+
 <%-  include("../commo/footer.ejs")%>

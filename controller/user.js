@@ -33,14 +33,15 @@ module.exports={
     login(req,res){
         let userInfo=req.body
         console.log(userInfo);
-    const denglu="select count(*) as count from user where username = ? and password = ?"
+    const denglu="select * from user where username = ? "
 
     conn.query(denglu,[userInfo.username,req.password],(err,result)=>{
         // console.log(result);
       if(err||result.length===0) return res.status(400).send({status:400,msg:"登陆失败请重试"})
-  console.log(result);
+//   console.log(result);
     //   console.log(req.session);
-    req.session.user=userInfo.username
+    console.log(result[0],6666);
+    req.session.user=result[0]
     req.session.islogion=true
      
       res.send({status:200,msg:"登陆成功"})
